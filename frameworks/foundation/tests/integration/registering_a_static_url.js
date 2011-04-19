@@ -1,5 +1,5 @@
 describe('Scenario: Registering a static URL', function() {
-  describe('Given the fake server is intercepting requests', function() {
+  describe('Given that I have setup Fictum', function() {
     beforeEach(function() {
       Fictum.setup();
     });

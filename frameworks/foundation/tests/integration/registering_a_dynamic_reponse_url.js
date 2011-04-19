@@ -1,5 +1,5 @@
 describe('Scenario: Registering a dynamic reponse URL', function() {
-  describe('Given a Fictum', function() {
+  describe('Given I have setup Fictum', function() {
     beforeEach(function() {
       Fictum.setup();
     });
@@ -8,7 +8,7 @@ describe('Scenario: Registering a dynamic reponse URL', function() {
       Fictum.teardown();
     });
 
-    describe('Given a URL that I want to stub', function() {
+    describe('And a URL that I want to stub', function() {
       var url;
       beforeEach(function() {
         url = '/something';
