@@ -20,7 +20,11 @@ integration tests. These can be seen within
 [foundation/tests/integration](https://github.com/gmoeck/fictum/tree/master/frameworks/foundation/tests/integration).
 
 ##Running the tests
-First start your server running.
+First you need to update your Buildfile to include sproutcore-jasmine.
+**Note**: When you go back to production, you need to recomment out
+these lines.
+
+Then start your server running.
 
     $ cd <your sproutcore project's root directory>
     $ sc-server
