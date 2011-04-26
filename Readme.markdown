@@ -7,12 +7,17 @@ Fictum is designed to make it easier to test your sproutcore applications in pur
 
 ##Installation
 
-To setup fictum to work in your SproutCore project, we need to add the framework to your application.
+To setup Fictum to work in your SproutCore project, we need to add the framework to your application.
 
     $ cd <your sproutcore project's root directory>
     $ mkdir frameworks # if you don't already have a frameworks folder
     $ cd frameworks
     $ git clone git://github.com/gmoeck/fictum.git
+
+Once Fictum has been downloaded into your frameworks directory, you then need to update your project's Buildfile file. This can be done like so:
+
+    config :all, :required => [:sproutcore, :fictum]
+
 
 ##Usage
 At this point, the easiest way to see how fictum can be used is to look at it's
