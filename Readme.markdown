@@ -19,7 +19,7 @@ At this point, the easiest way to see how fictum can be used is to look at it's
 integration tests. These can be seen within
 [foundation/tests/integration](https://github.com/gmoeck/fictum/tree/master/frameworks/foundation/tests/integration).
 
-##Running the tests
+##Running Fictum's Test Suite
 First you need to update your Buildfile to include sproutcore-jasmine.
 **Note**: When you go back to production, you need to recomment out
 these lines.
