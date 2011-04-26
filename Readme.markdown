@@ -20,7 +20,8 @@ integration tests. These can be seen within
 [foundation/tests/integration](https://github.com/gmoeck/fictum/tree/master/frameworks/foundation/tests/integration).
 
 ##Running Fictum's Test Suite
-First you need to update your Buildfile to include sproutcore-jasmine.
+First you need to update your Buildfile to include sproutcore-jasmine by
+uncommenting the lines specified in the Buildfile.
 **Note**: When you go back to production, you need to recomment out
 these lines.
 
