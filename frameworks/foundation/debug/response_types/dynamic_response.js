@@ -1,4 +1,4 @@
-sc_require('debug/fake_server/base');
+sc_require('debug/base');
 sc_require('debug/utils/json');
 
 Fictum.DynamicResponse = SC.Object.extend({

@@ -1,7 +1,7 @@
-sc_require('debug/fake_server/response_types/dynamic_response');
-sc_require('debug/fake_server/response_types/static_response');
-sc_require('debug/fake_server/url_types/string_url');
-sc_require('debug/fake_server/url_types/regular_expression_url');
+sc_require('debug/response_types/dynamic_response');
+sc_require('debug/response_types/static_response');
+sc_require('debug/url_types/string_url');
+sc_require('debug/url_types/regular_expression_url');
 
 Fictum.UrlStub = SC.Object.extend({
   init: function(attributes) {

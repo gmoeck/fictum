@@ -1,4 +1,4 @@
-sc_require('debug/fake_server/resource_type');
+sc_require('debug/resource_type');
 
 Fictum.ResourceStore = SC.Object.extend({
   resourceTypes: [],

@@ -1,4 +1,4 @@
-sc_require('debug/fake_server/base');
+sc_require('debug/base');
 
 Fictum.Url = SC.Object.extend({
   matches: function(url) {

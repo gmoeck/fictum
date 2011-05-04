@@ -1,4 +1,4 @@
-sc_require('debug/fake_server/url_stub');
+sc_require('debug/url_stub');
 
 Fictum.UrlStubCollection = SC.Object.extend({
   urls: [],

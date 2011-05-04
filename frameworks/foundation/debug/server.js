@@ -1,6 +1,5 @@
-sc_require('debug/fake_server/base');
-sc_require('debug/fake_server/url_stub_collection');
-sc_require('debug/fake_server/resource_store');
+sc_require('debug/url_stub_collection');
+sc_require('debug/resource_store');
 
 Fictum.Server = SC.Object.extend({
   init: function() {
