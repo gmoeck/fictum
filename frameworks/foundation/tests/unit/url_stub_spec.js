@@ -98,18 +98,35 @@ describe('Fictum.UrlStub', function() {
 
     beforeEach(function() {
       expectedResponse = 'something';
+      parsedResponse = {};
       spyOn(urlStub.get('response'), 'value').andReturn(value);
+      spyOn(jQuery, 'parseJSON').andReturn(parsedResponse);
       createSCResponseSpy = spyOn(SC.Response, 'create').andReturn(expectedResponse);
       resourceStore = {};
-      actualResponse = urlStub.getResponse(resourceStore);
     });
 
-    it('wraps it\'s response\'s value in a SC.Request', function() {
-      expect(createSCResponseSpy).toHaveBeenCalledWith({body: value});
+    context('when the json option has not been set', function() {
+      beforeEach(function() {
+        actualResponse = urlStub.getResponse(resourceStore);
+      });
+
+      it('wraps it\'s response\'s raw value in a SC.Request', function() {
+        expect(createSCResponseSpy).toHaveBeenCalledWith({body: value});
+      });
+
+      it('gives that response', function() {
+        expect(actualResponse).toBe(expectedResponse);
+      });
     });
 
-    it('gives that request', function() {
-      expect(actualResponse).toBe(expectedResponse);
+    context('when the json option has been set', function() {
+      beforeEach(function() {
+        actualResponse = urlStub.getResponse(resourceStore, {json: true});
+      });
+
+      it('wraps it\'s response\'s json value in a SC.Request', function() {
+        expect(createSCResponseSpy).toHaveBeenCalledWith({body: parsedResponse});
+      });
     });
   });
 });

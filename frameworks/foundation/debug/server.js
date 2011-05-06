@@ -17,8 +17,8 @@ Fictum.Server = SC.Object.extend({
     this.get('urlStubs').addUrl(url, stubValue);
   },
 
-  responseFor: function(url) {
-    return this.get('urlStubs').responseFor(url, this.get('resourceStore'));
+  responseFor: function(url, options) {
+    return this.get('urlStubs').responseFor(url, this.get('resourceStore'), options);
   },
 
   addResource: function(type, attributes) {

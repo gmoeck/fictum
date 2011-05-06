@@ -11,9 +11,9 @@ Fictum.UrlStubCollection = SC.Object.extend({
     this.get('urls').push(Fictum.UrlStub.create({url: url, response: stubValue}));
   },
 
-  responseFor: function(url, resourceStore) {
+  responseFor: function(url, resourceStore, options) {
     var urlStub = this._findUrlStubByUrl(url);
-    return urlStub === null ? undefined : urlStub.getResponse(resourceStore);
+    return urlStub === null ? undefined : urlStub.getResponse(resourceStore, options);
   },
 
   empty: function() {

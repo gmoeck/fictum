@@ -142,11 +142,12 @@ describe('Fictum', function() {
     var url= 'some_url.html', expectedResponse = 'something';
 
     context('when the fake server has been setup', function() {
-      var responseForSpy, rtnVal;
+      var responseForSpy, rtnVal, options;
       beforeEach(function() {
         Fictum.setup();
+        options = {};
         responseForSpy = spyOn(Fictum.server, 'responseFor').andReturn(expectedResponse);
-        actualResponse = Fictum.responseFor(url);
+        actualResponse = Fictum.responseFor(url, options);
       });
 
       afterEach(function() {
@@ -154,7 +155,7 @@ describe('Fictum', function() {
       });
 
       it('asks the server for it\'s response', function() {
-        expect(responseForSpy).toHaveBeenCalledWith(url);
+        expect(responseForSpy).toHaveBeenCalledWith(url, options);
       });
 
       it('returns the response from the server', function() {

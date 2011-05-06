@@ -52,18 +52,19 @@ describe('Fictum.Server', function() {
   });
 
   describe('#responseFor', function() {
-    var url = 'something.html', expectedResponse = 'something', responseForSpy, actualResponse, resourceStore;
+    var url = 'something.html', expectedResponse = 'something', responseForSpy, actualResponse, resourceStore, options;
 
     beforeEach(function() {
       resourceStore = {};
+      options = {something: 'something'};
       spyOn(Fictum.ResourceStore, 'create').andReturn(resourceStore);
       server = Fictum.Server.create();
       responseForSpy = spyOn(server.get('urlStubs'), 'responseFor').andReturn(expectedResponse);
-      actualResponse = server.responseFor(url);
+      actualResponse = server.responseFor(url, options);
     });
 
     it('asks it\'s url collection for the given url', function() {
-      expect(responseForSpy).toHaveBeenCalledWith(url, resourceStore);
+      expect(responseForSpy).toHaveBeenCalledWith(url, resourceStore, options);
     });
 
     it('returns that response', function() {

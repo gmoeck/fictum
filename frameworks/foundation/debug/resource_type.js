@@ -1,7 +1,9 @@
-sc_require('debug/fake-server/resource');
+sc_require('debug/resource');
 
 Fictum.ResourceType = SC.Object.extend({
-  resources: [],
+  init: function() {
+    this.set('resources', []);
+  },
 
   ofType: function(type) {
     return this.get('type') === type;

@@ -15,8 +15,10 @@ Fictum.UrlStub = SC.Object.extend({
     return this.get('url').matches(url);
   },
 
-  getResponse: function(store) {
-    return SC.Response.create({body: this.get('response').value(store)});
+  getResponse: function(store, options) {
+    var response = this.get('response').value(store);
+    if(options && options.json) response = jQuery.parseJSON(response);
+    return SC.Response.create({body: response});
   },
 
   _setupUrl: function() {

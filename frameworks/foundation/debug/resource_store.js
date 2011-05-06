@@ -1,7 +1,9 @@
 sc_require('debug/resource_type');
 
 Fictum.ResourceStore = SC.Object.extend({
-  resourceTypes: [],
+  init: function() {
+    this.set('resourceTypes', []);
+  },
 
   addResourceType: function(type, defaultAttributes) {
     this.get('resourceTypes').push(Fictum.ResourceType.create({ type: type, defaultAttributes: defaultAttributes }));

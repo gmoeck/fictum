@@ -22,9 +22,9 @@ Fictum = {
     this.server.registerUrl(url, response);
   },
 
-  responseFor: function(url) {
+  responseFor: function(url, options) {
     this._ensureServerIsSetup();
-    return this.server.responseFor(url);
+    return this.server.responseFor(url, options);
   },
 
   addResourceType: function(type, defaultAttributes) {
@@ -45,7 +45,7 @@ Fictum = {
     SC.Request.reopen({
       send: function(original, context) {
         if(Fictum.isARegisteredUrl(this.get('address'))) {
-          var response = Fictum.responseFor(this.get('address'));
+          var response = Fictum.responseFor(this.get('address'), {json: this.get('isJSON')});
           response.set('request', this);
           setTimeout(function() {
             response.set('status', 200);
