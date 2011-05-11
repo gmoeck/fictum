@@ -2,6 +2,7 @@ sc_require('debug/url_stub_collection');
 sc_require('debug/resource_store');
 
 Fictum.Server = SC.Object.extend({
+  defaultOptions: {status: 200},
   init: function() {
     sc_super();
     this.set('urlStubs', Fictum.UrlStubCollection.create());
@@ -13,8 +14,10 @@ Fictum.Server = SC.Object.extend({
     return this.get('urlStubs').hasUrl(url);
   },
 
-  registerUrl: function(url, stubValue) {
-    this.get('urlStubs').addUrl(url, stubValue);
+  registerUrl: function(url, stubValue, options) {
+    options = options ? options : this.get('defaultOptions');
+    console.log(options);
+    this.get('urlStubs').addUrl(url, stubValue, options);
   },
 
   responseFor: function(url, options) {

@@ -1,14 +1,17 @@
 sc_require('debug/url_stub');
 
 Fictum.UrlStubCollection = SC.Object.extend({
-  urls: [],
+
+  init: function() {
+    this.set('urls', []);
+  },
 
   hasUrl: function(url) {
     return this._findUrlStubByUrl(url) !== null; 
   },
 
-  addUrl: function(url, stubValue) {
-    this.get('urls').push(Fictum.UrlStub.create({url: url, response: stubValue}));
+  addUrl: function(url, stubValue, options) {
+    this.get('urls').push(Fictum.UrlStub.create({url: url, response: stubValue, options: options}));
   },
 
   responseFor: function(url, resourceStore, options) {

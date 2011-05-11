@@ -11,6 +11,10 @@ Fictum.UrlStub = SC.Object.extend({
     this._setupResponse();
   },
 
+  status: function() {
+    return this.get('options').status;
+  }.property('options').cacheable(),
+
   matchesUrl: function(url) {
     return this.get('url').matches(url);
   },
@@ -18,7 +22,7 @@ Fictum.UrlStub = SC.Object.extend({
   getResponse: function(store, options) {
     var response = this.get('response').value(store);
     if(options && options.json) response = jQuery.parseJSON(response);
-    return SC.Response.create({body: response});
+    return SC.Response.create({body: response, status: this.get('status')});
   },
 
   _setupUrl: function() {

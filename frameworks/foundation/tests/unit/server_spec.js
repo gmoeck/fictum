@@ -36,18 +36,35 @@ describe('Fictum.Server', function() {
   });
 
   describe('#registerUrl', function() {
+    var addUrlSpy, url, stub, defaultOptions;
     beforeEach(function() {
       server = Fictum.Server.create();
+      addUrlSpy = spyOn(server.get('urlStubs'), 'addUrl');
+      url = 'someUrl';
+      stub = 'something';
+      defaultOptions = {status: 200};
     });
 
-    it('delegates to it\'s url collection to register the url', function() {
-      var addUrlSpy = spyOn(server.get('urlStubs'), 'addUrl');
-      var url = 'someUrl';
-      var stub = 'something';
+    context('when no options are passed', function() {
+      beforeEach(function() {
+        server.registerUrl(url, stub);
+      });
 
-      server.registerUrl(url, stub);
+      it('registers the url with the default options', function() {
+        expect(addUrlSpy).toHaveBeenCalledWith(url, stub, defaultOptions);
+      });
+    });
 
-      expect(addUrlSpy).toHaveBeenCalledWith(url, stub);
+    context('when options are passed in', function() {
+      var options;
+      beforeEach(function() {
+        options = {status: 400};
+        server.registerUrl(url, stub, options);
+      });
+
+      it('registers the url with the passed in options', function() {
+        expect(addUrlSpy).toHaveBeenCalledWith(url, stub, options);
+      });
     });
   });
 

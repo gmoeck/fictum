@@ -17,9 +17,9 @@ Fictum = {
     return this.server.isARegisteredUrl(url);
   },
 
-  registerUrl: function(url, response) {
+  registerUrl: function(url, response, options) {
     this._ensureServerIsSetup();
-    this.server.registerUrl(url, response);
+    this.server.registerUrl(url, response, options);
   },
 
   responseFor: function(url, options) {

@@ -94,9 +94,11 @@ describe('Fictum.UrlStub', function() {
   });
 
   describe('#getResponse', function() {
-    var value = 'response value', createSCResponseSpy, expectedResponse, actualResponse, resourceStore;
+    var value = 'response value', createSCResponseSpy, expectedResponse, actualResponse, resourceStore, status;
 
     beforeEach(function() {
+      status = 200;
+      urlStub = Fictum.UrlStub.create({url: 'something', options: {status: status}});
       expectedResponse = 'something';
       parsedResponse = {};
       spyOn(urlStub.get('response'), 'value').andReturn(value);
@@ -111,7 +113,7 @@ describe('Fictum.UrlStub', function() {
       });
 
       it('wraps it\'s response\'s raw value in a SC.Request', function() {
-        expect(createSCResponseSpy).toHaveBeenCalledWith({body: value});
+        expect(createSCResponseSpy).toHaveBeenCalledWith({body: value, status: status});
       });
 
       it('gives that response', function() {
@@ -121,11 +123,12 @@ describe('Fictum.UrlStub', function() {
 
     context('when the json option has been set', function() {
       beforeEach(function() {
-        actualResponse = urlStub.getResponse(resourceStore, {json: true});
+        var options = {json: true};
+        actualResponse = urlStub.getResponse(resourceStore, options);
       });
 
       it('wraps it\'s response\'s json value in a SC.Request', function() {
-        expect(createSCResponseSpy).toHaveBeenCalledWith({body: parsedResponse});
+        expect(createSCResponseSpy).toHaveBeenCalledWith({body: parsedResponse, status: status});
       });
     });
   });

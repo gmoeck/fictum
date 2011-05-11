@@ -131,9 +131,10 @@ describe('Fictum', function() {
 
       it('tells the server to register the url with the passed in response', function() {
         var registerUrlSpy = spyOn(Fictum.server, 'registerUrl');
-        Fictum.registerUrl(url, response);
+        var options = {};
+        Fictum.registerUrl(url, response, options);
 
-        expect(registerUrlSpy).toHaveBeenCalledWith(url, response);
+        expect(registerUrlSpy).toHaveBeenCalledWith(url, response, options);
       });
     });
   });
