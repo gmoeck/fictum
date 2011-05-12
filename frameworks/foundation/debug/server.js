@@ -16,7 +16,6 @@ Fictum.Server = SC.Object.extend({
 
   registerUrl: function(url, stubValue, options) {
     options = options ? options : this.get('defaultOptions');
-    console.log(options);
     this.get('urlStubs').addUrl(url, stubValue, options);
   },
 
@@ -25,7 +24,7 @@ Fictum.Server = SC.Object.extend({
   },
 
   addResource: function(type, attributes) {
-    this.get('resourceStore').addResource(type, attributes);
+    return this.get('resourceStore').addResource(type, attributes);
   },
 
   addResourceType: function(type, defaultAttributes) {

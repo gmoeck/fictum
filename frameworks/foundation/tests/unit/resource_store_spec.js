@@ -24,15 +24,10 @@ describe('Fictum.ResourceStore', function() {
       beforeEach(function() {
         resourceType = 'someType';
         allResources = [];
-        resourceTypeObject.all = function() { return allResources };
-        resourceTypeObject.ofType = function() { return true; }
+        spyOn(resourceTypeObject, 'all').andReturn(allResources);
+        spyOn(resourceTypeObject, 'ofType').andReturn(true);
         spyOn(Fictum.ResourceType, 'create').andReturn(resourceTypeObject);
         store.addResourceType(resourceType, {});
-      });
-
-      afterEach(function() {
-        resourceTypeObject.all = function() {};
-        resourceTypeObject.ofType = function() {};
       });
 
       it('returns all the items of that type', function() {
@@ -51,23 +46,22 @@ describe('Fictum.ResourceStore', function() {
     });
 
     context('when the passed in type matches a type in the store', function() {
-      var attributes, resourceType, addResourceSpy;
+      var attributes, resourceType, addResourceSpy, resource, returnedValue;
       beforeEach(function() {
-        resourceType = 'SomeType', attributes = {key: 'value'};
-        resourceTypeObject.ofType = function() { return true; };
-        addResourceSpy = spyOn(resourceTypeObject, 'addResource');
+        resourceType = 'SomeType', attributes = {key: 'value'}, resource = {};
+        spyOn(resourceTypeObject, 'ofType').andReturn(true);
+        addResourceSpy = spyOn(resourceTypeObject, 'addResource').andReturn(resource);
         spyOn(Fictum.ResourceType, 'create').andReturn(resourceTypeObject);
-        store.addResourceType(resourceType, {});
+        returnedValue = store.addResource(resourceType, attributes);
       });
 
-      afterEach(function() {
-        resourceType.ofType = function () {};
-      });
-
-      it('tells that type to add a resource with the passed in attributes', function() {
-        store.addResource(resourceType, attributes);
+      it('adds a resource with the passed in attributes', function() {
 
         expect(addResourceSpy).toHaveBeenCalledWith(attributes);
+      });
+
+      it('returns the created attributes', function() {
+        expect(returnedValue).toBe(resource);
       });
     });
   });

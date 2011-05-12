@@ -13,7 +13,7 @@ Fictum.ResourceStore = SC.Object.extend({
     var resourceType = this._resourceTypeFor(type);
     if(resourceType == null)
       throw new Error('ERROR: You requested to add a resource of type "' + type + '", but that type has not been registered in the resource store');
-    resourceType.addResource(attributes);
+    return resourceType.addResource(attributes);
   },
 
   allOfType: function(type) {

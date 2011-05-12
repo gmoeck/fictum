@@ -34,7 +34,7 @@ Fictum = {
 
   addResource: function(type, attributes) {
     this._ensureServerIsSetup();
-    this.server.addResource(type, attributes);
+    return this.server.addResource(type, attributes);
   },
 
   startInterceptingRequests: function() {

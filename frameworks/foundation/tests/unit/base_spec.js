@@ -204,23 +204,26 @@ describe('Fictum', function() {
   });
 
   describe('.addResource', function() {
-    var addResourceSpy, attributes = { title: 'something' }, type = 'Something';
+    var addResourceSpy, attributes = { title: 'something' }, type = 'Something', resource, returnedValue;
 
     context('when the fake server has been setup', function() {
       beforeEach(function() {
         Fictum.setup();
+        resource = {};
+        addResourceSpy = spyOn(Fictum.server, 'addResource').andReturn(resource);
+        returnedValue = Fictum.addResource(type, attributes);
       });
 
       afterEach(function() {
         Fictum.teardown();
       });
 
-      it('adds that resource type to the server', function() {
-        addResourceSpy = spyOn(Fictum.server, 'addResource');
-        Fictum.addResource(type, attributes);
-
-
+      it('adds that resource to the server', function() {
         expect(addResourceSpy).toHaveBeenCalledWith(type, attributes);
+      });
+
+      it('returns the created resource', function() {
+        expect(returnedValue).toBe(resource);
       });
     });
 

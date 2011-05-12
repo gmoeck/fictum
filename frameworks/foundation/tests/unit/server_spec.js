@@ -105,13 +105,22 @@ describe('Fictum.Server', function() {
   });
 
   describe('#addResource', function() {
-    it('delegates to it\'s resource store to register the resource type', function() {
-      var type = 'Item', attributes = {key: 'value'};
+    var type, attributes, addResourceSpy, resource, returnedValue;
+    beforeEach(function() {
+      type = 'Item', attributes = {key: 'value'};
       server = Fictum.Server.create();
-      var addResourceSpy = spyOn(server.get('resourceStore'), 'addResource');
-      server.addResource(type, attributes);
+      resource = {};
+      addResourceSpy = spyOn(server.get('resourceStore'), 'addResource').andReturn(resource);
 
+      returnedValue = server.addResource(type, attributes);
+    });
+
+    it('adds the resource to the resource store', function() {
       expect(addResourceSpy).toHaveBeenCalledWith(type, attributes);
+    });
+
+    it('returns the added resource', function() {
+      expect(returnedValue).toBe(resource);
     });
   });
 });
