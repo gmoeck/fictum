@@ -15,7 +15,7 @@ describe('Fictum.ResourceStore', function() {
       it('throws an error alerting the developer that they have not registered that type', function() {
         expect(function() {
           store.allOfType('unknownType');
-        }).toThrow('ERROR: The type requested is not registered in the resource store');
+        }).toThrow('ERROR: You requested all resources of type "unknownType", but that type has not been registered in the resource store');
       });
     });
 
@@ -46,7 +46,7 @@ describe('Fictum.ResourceStore', function() {
       it('throws an error alerting the developer that they have not registered that type', function() {
         expect(function() {
           store.addResource('unknownType');
-        }).toThrow('ERROR: The type requested is not registered in the resource store');
+        }).toThrow('ERROR: You requested to add a resource of type "unknownType", but that type has not been registered in the resource store');
       });
     });
 
