@@ -19,11 +19,12 @@ Fictum = {
 
   registerUrl: function(url, response, options) {
     this._ensureServerIsSetup();
-    this.server.registerUrl(url, response, options);
+    this.server.registerUrl(url, response, options || {});
   },
 
   responseFor: function(url, options) {
     this._ensureServerIsSetup();
+    options.url = url;
     return this.server.responseFor(url, options);
   },
 

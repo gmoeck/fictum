@@ -20,7 +20,7 @@ Fictum.UrlStub = SC.Object.extend({
   },
 
   getResponse: function(store, options) {
-    var response = this.get('response').value(store);
+    var response = this.get('response').value(store, options);
     if(options && options.json) response = jQuery.parseJSON(response);
     return SC.Response.create({body: response, status: this.get('status')});
   },
