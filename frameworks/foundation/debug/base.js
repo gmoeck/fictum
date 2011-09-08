@@ -45,7 +45,7 @@ Fictum = {
     SC.Request.reopen({
       send: function(original, context) {
         if(Fictum.isARegisteredUrl(this.get('address'))) {
-          var response = Fictum.responseFor(this.get('address'), {json: this.get('isJSON')});
+          var response = Fictum.responseFor(this.get('address'), {json: this.get('isJSON'), type: this.get('type'), body: context});
           response.set('request', this);
           setTimeout(function() {
             response.set('status', 200);
