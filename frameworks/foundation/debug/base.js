@@ -38,6 +38,11 @@ Fictum = {
     return this.server.addResource(type, attributes);
   },
 
+  removeResource: function(type, key, value) {
+    this._ensureServerIsSetup();
+    return this.server.removeResource(type, key, value);
+  },
+
   startInterceptingRequests: function() {
     if(Fictum.originalSendFunction != undefined)
       throw new Error('ERROR: Already intercepting requests');
