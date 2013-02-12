@@ -29,5 +29,9 @@ Fictum.Server = SC.Object.extend({
 
   addResourceType: function(type, defaultAttributes) {
     this.get('resourceStore').addResourceType(type, defaultAttributes);
+  },
+
+  removeResource: function(type, key, value) {
+    return this.get('resourceStore').removeResource(type, attributes);
   }
 });

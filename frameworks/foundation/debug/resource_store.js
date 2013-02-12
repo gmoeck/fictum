@@ -16,6 +16,14 @@ Fictum.ResourceStore = SC.Object.extend({
     return resourceType.addResource(attributes);
   },
 
+  removeResource: function(type, key, value) {
+    var resourceType = this._resourceTypeFor(type);
+    if (resourceType === null) {
+      throw new Error('ERROR: You requested to remove a resource of type "' + type + '", but that type has not been registered in the resource store');
+    }
+    return resourceType.removeResource(key, value);
+  },
+
   allOfType: function(type) {
     var resourceType = this._resourceTypeFor(type);
     if(! resourceType)

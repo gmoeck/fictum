@@ -19,11 +19,12 @@ Fictum = {
 
   registerUrl: function(url, response, options) {
     this._ensureServerIsSetup();
-    this.server.registerUrl(url, response, options);
+    this.server.registerUrl(url, response, options || {});
   },
 
   responseFor: function(url, options) {
     this._ensureServerIsSetup();
+    options.url = url;
     return this.server.responseFor(url, options);
   },
 
@@ -37,6 +38,11 @@ Fictum = {
     return this.server.addResource(type, attributes);
   },
 
+  removeResource: function(type, key, value) {
+    this._ensureServerIsSetup();
+    return this.server.removeResource(type, key, value);
+  },
+
   startInterceptingRequests: function() {
     if(Fictum.originalSendFunction != undefined)
       throw new Error('ERROR: Already intercepting requests');
@@ -45,11 +51,13 @@ Fictum = {
     SC.Request.reopen({
       send: function(original, context) {
         if(Fictum.isARegisteredUrl(this.get('address'))) {
-          var response = Fictum.responseFor(this.get('address'), {json: this.get('isJSON')});
+          var response = Fictum.responseFor(this.get('address'), {json: this.get('isJSON'), type: this.get('type'), body: context});
           response.set('request', this);
           setTimeout(function() {
-            response.set('status', 200);
-            response.notify();
+            SC.run(function() {
+              response.set('status', 200);
+              response.notify();
+            });
           }, 1);
           return response;
         } else {

@@ -16,6 +16,7 @@ Fictum.UrlStubCollection = SC.Object.extend({
 
   responseFor: function(url, resourceStore, options) {
     var urlStub = this._findUrlStubByUrl(url);
+    options.matches = urlStub.matchesUrl(url);
     return urlStub === null ? undefined : urlStub.getResponse(resourceStore, options);
   },
 

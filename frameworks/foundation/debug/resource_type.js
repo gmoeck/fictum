@@ -19,11 +19,31 @@ Fictum.ResourceType = SC.Object.extend({
     return newResource;
   },
 
+  removeResource: function(key, value) {
+    var resourceIndex = this._resourceIndexFor(key, value);
+    if (resourceIndex > -1) { this.get('resources').removeAt(resourceIndex); }
+    return resourceIndex > -1;
+  },
+
   _attributeHashFor: function(attributes) {
     var defaultAttributes = this.get('defaultAttributes');
-    for( var key in attributes) {
-      defaultAttributes[key] = attributes[key];
+    for( var key in defaultAttributes) {
+      if (attributes[key] === undefined) { attributes[key] = defaultAttributes[key]; }
     }
-    return defaultAttributes;
+    return attributes;
+  },
+
+  _resourceIndexFor: function(key, value) {
+    var resources = this.get('resources'),
+        len = resources.get('length') || 0,
+        idx;
+
+    for (idx = 0; idx < len; idx++) {
+      if (resources[idx] && resources[idx][key] === value) {
+        return idx;
+      }
+    }
+
+    return -1;
   }
 });
